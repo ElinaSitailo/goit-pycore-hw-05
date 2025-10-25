@@ -1,8 +1,11 @@
 from normalize_phone import normalize_phone
+
 CONTACT_NOT_FOUND_MSG = "Contact not found."
 UNKNOWN_COMMAND_MSG = "Unknown command. Please try again."
 
 EXPECT_AT_LEAST_2_ARGS_MSG = "Insufficient arguments. Expected at least 2 arguments."
+
+
 def at_least_2_args_decorator(func):
     def action(args, contacts) -> str:
         if len(args) < 2:
@@ -11,7 +14,11 @@ def at_least_2_args_decorator(func):
             return func(args, contacts)
 
     return action
+
+
 EXPECT_AT_LEAST_1_ARGS_MSG = "Insufficient arguments. Expected at least 1 arguments."
+
+
 def at_least_1_args_decorator(func):
     def action(args, contacts) -> str:
         if len(args) < 1:
@@ -21,12 +28,14 @@ def at_least_1_args_decorator(func):
 
     return action
 
+
 def parse_input(user_input):
     if len(user_input.strip()) == 0:
         return ("",)
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
     return cmd, *args
+
 
 @at_least_2_args_decorator
 def add_contact(args, contacts) -> str:
@@ -49,6 +58,7 @@ def update_contact(args, contacts) -> str:
             return "Contact updated."
         else:
             return CONTACT_NOT_FOUND_MSG
+
 
 @at_least_1_args_decorator
 def show_contact(args, contacts) -> str:
